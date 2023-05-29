@@ -25,10 +25,10 @@ public class Invoice {
 		printBanner();
 
 		// calculate outstanding
-		outstanding = printDetails(e, outstanding);
+		outstanding = calculateOutstanding(e, outstanding);
 
 		// print details
-		calculateOutstanding(outstanding);
+		printDetails(outstanding);
 	}
 
 	private void printBanner() {
@@ -37,7 +37,7 @@ public class Invoice {
 		_printer.print("*************************");
 	}
 
-	private double printDetails(Enumeration<Order> e, double outstanding) {
+	private double calculateOutstanding(Enumeration<Order> e, double outstanding) {
 		while (e.hasMoreElements()) {
 			Order each = e.nextElement();
 			outstanding += each.getAmount();
@@ -45,7 +45,7 @@ public class Invoice {
 		return outstanding;
 	}
 
-	private void calculateOutstanding(double outstanding) {
+	private void printDetails(double outstanding) {
 		_printer.print("name: " + _name);
 		_printer.print("amount: " + outstanding);
 	}
