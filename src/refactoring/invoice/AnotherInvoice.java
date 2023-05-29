@@ -33,6 +33,12 @@ public class AnotherInvoice {
 		printDetails(outstanding);
 	}
 
+	private void printBanner() {
+		_printer.print("*************************");
+		_printer.print("***** Customer Owes *****");
+		_printer.print("*************************");
+	}
+	
 	private double calculateOutstanding(Enumeration<Order> e, double outstanding) {
 		while (e.hasMoreElements()) {
 			Order each = e.nextElement();
@@ -40,12 +46,6 @@ public class AnotherInvoice {
 			count += 1;
 		}
 		return outstanding;
-	}
-
-	private void printBanner() {
-		_printer.print("*************************");
-		_printer.print("***** Customer Owes *****");
-		_printer.print("*************************");
 	}
 
 	private void printDetails(double outstanding) {
