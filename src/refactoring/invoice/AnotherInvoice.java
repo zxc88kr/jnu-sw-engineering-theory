@@ -9,6 +9,7 @@ public class AnotherInvoice {
 	private MyCollection _orders;
 
 	private Printer _printer;
+	private int count;
 
 	public AnotherInvoice(String customer_name, MyCollection orders, Printer printer) {
 		this._name = customer_name;
@@ -20,21 +21,34 @@ public class AnotherInvoice {
 	void printOwing() {
 		Enumeration<Order> e = _orders.elements();
 		double outstanding = 0.0;
-		int count = 0;
+		count = 0;
 
 		// print banner
-		_printer.print("*************************");
-		_printer.print("***** Customer Owes *****");
-		_printer.print("*************************");
+		printBanner();
 
 		// calculate outstanding
+		outstanding = calculateOutstanding(e, outstanding);
+
+		// print details
+		printDetails(outstanding);
+	}
+
+	private double calculateOutstanding(Enumeration<Order> e, double outstanding) {
 		while (e.hasMoreElements()) {
 			Order each = e.nextElement();
 			outstanding += each.getAmount();
 			count += 1;
 		}
+		return outstanding;
+	}
 
-		// print details
+	private void printBanner() {
+		_printer.print("*************************");
+		_printer.print("***** Customer Owes *****");
+		_printer.print("*************************");
+	}
+
+	private void printDetails(double outstanding) {
 		_printer.print("name: " + _name);
 		_printer.print("amount: " + outstanding);
 		_printer.print("count: " + count);
